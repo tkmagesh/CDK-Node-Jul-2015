@@ -26,7 +26,7 @@ var server = http.createServer(function(req, res){
             res.statusCode = 404;
             res.end();
         }
-    } else if (req.url.pathname === "/calculator"){
+    } else if (req.url.pathname === "/calculator" && req.method === "GET"){
         var number1 = parseInt(req.query.number1,10),
             number2 = parseInt(req.query.number2,10),
             operation = req.query.operation;
@@ -34,6 +34,22 @@ var server = http.createServer(function(req, res){
         var result = calculator[operation](number1, number2);
         res.write(result.toString());
         res.end();
+    } else if (req.url.pathname === "/calculator" && req.method === "POST"){
+        var input = '';
+        req.on('data', function(chunk){
+            input += chunk;
+        });
+        req.on('end', function(){
+            req.body = querystring.parse(input);
+            var number1 = parseInt(req.body.number1,10),
+                number2 = parseInt(req.body.number2,10),
+                operation = req.body.operation;
+
+            var result = calculator[operation](number1, number2);
+            res.write(result.toString());
+            res.end();
+        })
+
     } else {
         res.statusCode = 404;
         res.end();
@@ -42,21 +58,3 @@ var server = http.createServer(function(req, res){
 });
 server.listen(8080);
 console.log("server listening on port 8080");
-
-
-/*
-http://localhost:8080/calculator?number1=100&number2=200&operation=add
-
-req.url => /calculator?number1=100&number2=200&operation=add
-
-url.parse(req.url)
-querystring.parse()
-
-1. parse the url
-2. check if the requested resource is a static resource [".html",".css",".js",".jpg",".png",".ico"]
-
-3. if static resource serve it if exists else serve 404
-4. check if the requested resource = '/calculator'
-5. if yes parse the querystring and use the 'calculator.js' to get the result and send the same to the user
-6. else serve 404
-*/
