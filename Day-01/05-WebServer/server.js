@@ -5,7 +5,12 @@ var url = require("url");
 var querystring = require("querystring");
 var calculator = require("./calculator");
 
-
+/*
+1. data parse
+2. serving static resources
+3. serving /calculator requests
+4. not found response
+*/
 
 var staticResourceExtns = [".html",".css",".js",".png",".jpg",".ico",".txt",".json"];
 
