@@ -1,13 +1,17 @@
 var http = require("http");
-var dataParser = require("./dataParser");
-var serveStatic = require("./serveStatic");
-var calculatorProcessor = require("./calculatorProcessor");
-var notFoundAction = require("./notFoundAction");
+var path = require("path");
+var dataParser = require("./middlewares/dataParser");
+var serveStatic = require("./middlewares/serveStatic");
+var calculatorProcessor = require("./app/calculatorProcessor");
+var notFoundAction = require("./middlewares/notFoundAction");
+var appEngine = require("./middlewares/appEngine");
 
-var appEngine = require("./appEngine");
+var router = require("./middlewares/router");
+router.post("./app/calculator", calculatorProcessor);
+
 appEngine.use(dataParser);
-appEngine.use(serveStatic);
-appEngine.use(calculatorProcessor);
+appEngine.use(serveStatic(path.join(__dirname, "public")));
+appEngine.use(router);
 appEngine.use(notFoundAction);
 
 var server = http.createServer(appEngine);
