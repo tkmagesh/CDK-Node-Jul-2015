@@ -1,5 +1,5 @@
 <style>
-    .completed{
+    .closed{
         color : red;
         text-decoration: line-through;
         font-style: italic;
@@ -10,7 +10,12 @@
 <a href="/bugs/new">Create New</a>
 <ol>
     {{#each list}}
-    <li> <span>{{name}}</span> - {{isClosed}} <a href="">X</a></li>
+    <li>
+        {{#if isClosed}}
+            <span class="closed">{{name}}</span>
+        {{else}}
+            <span>{{name}}</span>
+        {{/if}}
+        <a href="/bugs/toggle/{{id}}">X</a></li>
     {{/each}}
-    <li class="completed"><span>A dummy bug</span> <a href="">X</a></li>
 </ol>

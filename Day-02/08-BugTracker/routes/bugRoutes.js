@@ -13,11 +13,25 @@ router.get('/', function(req, res, next) {
     var result = {
         list : bugList
     };
+    result.reqCount = req.session.reqCount;
     res.render('bugs/index', result);
 });
 
 router.get('/new', function(req, res, next){
-    res.render('bugs/new');
+    var result = {};
+    result.reqCount = req.session.reqCount;
+    res.render('bugs/new', result);
+});
+
+router.get('/toggle/:id', function(req, res, next){
+   var bugId = parseInt(req.params.id);
+   var bug = bugList.filter(function(bug){
+       return bug.id === bugId;
+   })[0];
+   if (bug){
+       bug.isClosed = !bug.isClosed;
+   }
+   res.redirect('/bugs');
 });
 
 router.post('/new', function(req, res, next){
