@@ -7,7 +7,8 @@ var notFoundAction = require("./middlewares/notFoundAction");
 var appEngine = require("./middlewares/appEngine");
 
 var router = require("./middlewares/router");
-router.post("./app/calculator", calculatorProcessor);
+router.post("/calculator", calculatorProcessor);
+
 
 appEngine.use(dataParser);
 appEngine.use(serveStatic(path.join(__dirname, "public")));

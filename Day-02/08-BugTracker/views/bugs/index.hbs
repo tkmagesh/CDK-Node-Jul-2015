@@ -1,0 +1,16 @@
+<style>
+    .completed{
+        color : red;
+        text-decoration: line-through;
+        font-style: italic;
+    }
+</style>
+<h1>Bugs</h1>
+<hr>
+<a href="/bugs/new">Create New</a>
+<ol>
+    {{#each list}}
+    <li> <span>{{name}}</span> - {{isClosed}} <a href="">X</a></li>
+    {{/each}}
+    <li class="completed"><span>A dummy bug</span> <a href="">X</a></li>
+</ol>
