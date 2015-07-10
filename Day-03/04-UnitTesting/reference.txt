@@ -1,1 +1,2 @@
 http://caolan.org/posts/unit_testing_in_node_js/
+http://bit.ly/node-vids
