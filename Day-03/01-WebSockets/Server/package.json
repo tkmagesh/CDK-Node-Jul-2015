@@ -1,0 +1,17 @@
+{
+  "name": "myServer",
+  "version": "0.1.0",
+  "description": "a sample web socket server for demonstration",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "websockets"
+  ],
+  "author": "Magesh K",
+  "license": "ISC",
+  "dependencies": {
+    "nodejs-websocket": "^1.2.1"
+  }
+}
