@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var socketCommunicator = require('../services/socketCommunicator');
 
 /* GET users listing. */
 // -> /bugs/
@@ -45,6 +46,7 @@ router.post('/new', function(req, res, next){
         isClosed : false
     };
     bugList.push(newBug);
+    socketCommunicator.trigger('newBug', JSON.stringify(newBug));
     res.redirect('/bugs');
 });
 

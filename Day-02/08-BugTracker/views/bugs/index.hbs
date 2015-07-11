@@ -5,7 +5,15 @@
         font-style: italic;
     }
 </style>
-<h1>Bugs</h1>
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      //On message from server
+      socket.on('newBug', function(msg){
+        $("#divMessage").html(msg);
+      });
+    </script><h1>Bugs</h1>
 <hr>
 <a href="/bugs/new">Create New</a>
 <ol>
@@ -19,3 +27,4 @@
         <a href="/bugs/toggle/{{id}}">X</a></li>
     {{/each}}
 </ol>
+<div id="divMessage"></div>
